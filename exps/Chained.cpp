@@ -37,12 +37,12 @@
 /// \return
 double Chained::f(const double *x) {
     if (_defaultTimes == 0) {
-        throw std::invalid_argument("defaultTimes must be greater than 0");
+        throw std::invalid_argument("times must be greater than 0");
     }
 
     double a = pow(*x, 2) / 4; // (x/2)^2
 
-    pB[_defaultTimes - 1] = 2 * _defaultTimes + 1;
+    pB[_defaultTimes - 1] = 2 * _defaultTimes + 1; // seeeeegs
     pC[_defaultTimes - 1] = pB[_defaultTimes - 1];
     int times = (int)_defaultTimes; // signed integer review
 
@@ -65,4 +65,35 @@ double Chained::th(double x) {
 double Chained::cth(double x) {
     // i try to make more elegant equalization.
     return (1 / th(x));
+}
+
+void Chained::sete(double e) {
+    _epsilon = e;
+}
+
+double Chained::sin(double x) {
+    x = std::fmod(x + M_PI, 2 * M_PI);
+    if (x < 0) x += 2 * M_PI;
+    x -= M_PI;
+
+    double x2 = x * x;
+    double result = x;
+    double term = x;
+    double numerator = x2;
+    double denominator = 2.0 * 3.0;
+
+    for (unsigned int n = 1; n < _defaultTimes; ++n) {
+        double next_term = -numerator / (denominator - term);
+        result = x / (1.0 + next_term);
+
+        if (std::fabs(term - next_term) < _epsilon) {
+            break;
+        }
+
+        term = next_term;
+        numerator *= (2.0 * n) * (2.0 * n + 1.0);
+        denominator *= (2.0 * n + 1.0) * (2.0 * n + 2.0);
+    }
+
+    return result;
 }

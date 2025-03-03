@@ -17,11 +17,15 @@ private:
     unsigned int _defaultTimes = 10;
     // declare API details
     double f(const double *x);
+    double _epsilon;
 public:
     /// Make instance of Chained fraction methods storage
     /// \param defaultTimes depth of chained-fractions
     explicit Chained(unsigned int defaultTimes) {
         _defaultTimes = defaultTimes;
+        _epsilon = 1e-10;
+        pB.resize(_defaultTimes);
+        pC.resize(_defaultTimes);
     }
     /// Make instance of Chained fraction methors storage
     /// default depth of chained-fraction=10
@@ -30,15 +34,13 @@ public:
     }
 
     /// Kill instance and temporary memory values
-    ~Chained() {
-
-    }
+    ~Chained() = default;
+    void sete(double e);
     double sh(double x);
     double ch(double x);
     double th(double x);
     double cth(double x);
+    double sin(double x);
 };
-
-
 
 #endif //CHVIEW_CHAINED_HPP
