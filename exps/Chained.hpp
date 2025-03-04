@@ -16,7 +16,8 @@ private:
     // depth of chained fraction
     unsigned int _defaultTimes = 10;
     // declare API details
-    double f(const double *x);
+    double th05x(const double *x);
+    double th05xs(const double *x);
     double _epsilon;
 public:
     /// Make instance of Chained fraction methods storage
@@ -37,10 +38,13 @@ public:
     ~Chained() = default;
     void sete(double e);
     double sh(double x);
+    double sh2(double x);
+    double ch2(double x);
     double ch(double x);
     double th(double x);
     double cth(double x);
     double sin(double x);
+    double lsin(double x);
 };
 
 #endif //CHVIEW_CHAINED_HPP
