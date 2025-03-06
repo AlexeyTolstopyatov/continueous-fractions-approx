@@ -4,7 +4,7 @@ project(chview)
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(chview main.cpp
-        exps/Chained.cpp
-        exps/Chained.hpp
-        exps/Exponential.cpp
-        exps/Exponential.hpp)
+        chains/Chained.cpp
+        chains/Chained.hpp
+        exponents/Exponential.cpp
+        exponents/Exponential.hpp)
